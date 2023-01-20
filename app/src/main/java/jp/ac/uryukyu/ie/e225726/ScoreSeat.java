@@ -10,10 +10,8 @@ class Score {
 }
 
 public class ScoreSeat {
-    String name;
     Score[] scores; 
-    ScoreSeat(String name){
-        this.name = name;
+    ScoreSeat(){
         this.scores = new Score[14];
         scores[0] = new Score("エース",0);
         scores[1] = new Score("デュース",0);
