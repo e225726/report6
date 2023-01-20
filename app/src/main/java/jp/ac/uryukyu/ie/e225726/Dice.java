@@ -12,10 +12,12 @@ public class Dice {
     void rollTheDice(){
         Random rand = new Random();
         roll = rand.nextInt(5) + 1;
-        System.out.println(name+roll);
     }
     int getTheRoll(){
         return roll;
+    }
+    void showDice(){
+        System.out.println(name+":"+roll+",");
     }
 
     

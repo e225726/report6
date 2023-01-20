@@ -13,6 +13,33 @@ public class Player {
         dices.add(new Dice("サイコロd",0));
         dices.add(new Dice("サイコロe",0));    
     }
+    //サイコロふる
+    void rollDice(){
+        CommandSelector c = new CommandSelector();
+        for(int i=0;i<dices.size();i++){
+            c.addCommand(dices.get(i).name);
+        }
+        System.out.println("サイコロを振る");
+        for(int ii=0;ii<dices.size();ii++){
+            dices.get(ii).rollTheDice();
+            dices.get(ii).showDice();
+        }
+        for(int iii=0;iii<2;iii++){
+            var dice =c.waitForUsersCommandDice("どのサイコロを振り直す？");
+            if(dice.contains(5)==false){
+               for(int iiii=0;iiii<dice.size();iiii++){
+                   dices.get(dice.get(iiii)).rollTheDice();
+                } 
+            }
+            for(int in=0;in<dices.size();in++){
+                dices.get(in).showDice();
+            }
+            
+        }
+        
+
+
+    }
     //エースの時の処理
     void ace(){
         for(int a=0;a<dices.size();a++){
