@@ -19,13 +19,13 @@ public class ScoreSeat {
         scores[3] = new Score("フォー",0);
         scores[4] = new Score("ファイブ",0);
         scores[5] = new Score("シックス",0);
-        scores[6] = new Score("ボーナス",0);
-        scores[7] = new Score("チョイス",0);
-        scores[8] = new Score("フォーダイス",0);
-        scores[9] = new Score("フルハウス",0);
-        scores[10] = new Score("Sストレート",0);
-        scores[11] = new Score("Bストレート",0);
-        scores[12] = new Score("ヨット",0);
+        scores[6] = new Score("チョイス",0);
+        scores[7] = new Score("フォーダイス",0);
+        scores[8] = new Score("フルハウス",0);
+        scores[9] = new Score("Sストレート",0);
+        scores[10] = new Score("Bストレート",0);
+        scores[11] = new Score("ヨット",0);
+        scores[12] = new Score("ボーナス",0);
         scores[13] = new Score("合計",0);
     }
     void showScoreSeat(){

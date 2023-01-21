@@ -36,9 +36,35 @@ public class Player {
             }
             
         }
-        
-
-
+    }
+    //役をきめる
+    void decideRole(){
+        CommandSelector co = new CommandSelector();
+        for(int i=0;i<12;i++){
+            co.addCommand(myScore.scores[i].roleName);
+        }
+        var ro = co.waitForUsersCommandRole("どの役にする？");
+        switch(ro){
+            case 0: ace(); 
+                    bonus();break;
+            case 1: duce(); 
+                    bonus(); break;
+            case 2: tray();
+                    bonus(); break;
+            case 3: four(); 
+                    bonus(); break;
+            case 4: five(); 
+                    bonus(); break;
+            case 5: six(); 
+                    bonus(); break; 
+            case 6: choice(); break;
+            case 7: fourDice(); break;
+            case 8: fullHouse(); break;
+            case 9: sStraight(); break;
+            case 10: bStraight(); break;
+            case 11: yacht(); break;   
+        }
+        myScore.showScoreSeat();
     }
     //エースの時の処理
     void ace(){
@@ -91,23 +117,29 @@ public class Player {
     //ボーナスの時の処理
     void bonus(){
         int bon=0;//適当な変数　なんでもいい
-        for(int b=0;b<myScore.scores.length;b++){
+        for(int b=0;b<6;b++){
             bon+=myScore.scores[b].roleScores;
         }
-        if(bon==53){
-            myScore.scores[6].roleScores+=50;
+        if(bon==63){
+            myScore.scores[12].roleScores+=35;
         }
     }
     //チョイスの時の処理
     void choice(){
         for(int c=0;c<dices.size();c++){
-            myScore.scores[7].roleScores += dices.get(c).roll;
+            myScore.scores[6].roleScores += dices.get(c).roll;
+        }
+    }
+    //フォーダイスの時の処理・・・思い付かない
+    void fourDice(){
+        for (int fu=0;fu<dices.size();fu++){
+            myScore.scores[7].roleScores +=dices.get(fu).roll;
         }
     }
     //フルハウスの時の処理・・・思い付かない
     void fullHouse(){
         for (int fu=0;fu<dices.size();fu++){
-            myScore.scores[9].roleScores +=dices.get(fu).roll;
+            myScore.scores[8].roleScores +=dices.get(fu).roll;
         }
     }
     //sストレートの時の処理  代数　algebra
@@ -128,14 +160,11 @@ public class Player {
         }
         //dicesのままじゃ比較できない　dices.rollを取り出す
         for(int s_4=0;s_4<dices.size();s_4++){
-            dices.get(s_4).rollTheDice();
             alg.add(dices.get(s_4).roll);
         }
         //containsメソッド
         if(alg.containsAll(check_1)||alg.containsAll(check_2)||alg.containsAll(check_3)){
-            for(int s_5=0;s_5<dices.size();s_5++){
-                myScore.scores[10].roleScores += dices.get(s_5).roll;
-            }
+            myScore.scores[9].roleScores += 15;
         }   
     }
     //bストレートの時の処理　sストレートとだいたい一緒
@@ -153,9 +182,7 @@ public class Player {
             alg.add(dices.get(b_3).roll);
         }
         if(alg.containsAll(check_1)||alg.containsAll(check_2)){
-            for(int b_4=0;b_4<dices.size();b_4++){
-                myScore.scores[11].roleScores+=dices.get(b_4).roll;
-            }
+            myScore.scores[10].roleScores+=30;
         }
     }
     //ヨットの時の処理
@@ -171,9 +198,16 @@ public class Player {
             }
             if(alg.containsAll(check)){
                 for(int y_3=0;y_3<dices.size();y_3++){
-                    myScore.scores[12].roleScores+=dices.get(y_3).roll;
+                    myScore.scores[11].roleScores+=dices.get(y_3).roll;
                 }
             }
         }
+    }
+    //合計の処理
+    int sum(){
+        for(int s=0;s<myScore.scores.length-1;s++){
+            myScore.scores[13].roleScores += myScore.scores[s].roleScores;
+        }
+        return myScore.scores[13].roleScores;
     }
 }
