@@ -12,6 +12,7 @@ public class Main {
             System.out.println(i+"ターン目");
             for(int in=0;in<turn.size();in++){
                 System.out.println(turn.get(in).name+"の番");
+                turn.get(in).myScore.showScoreSeat();
                 turn.get(in).rollDice();
                 turn.get(in).decideRole();
             }
