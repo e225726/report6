@@ -13,9 +13,6 @@ public class Dice {
         Random rand = new Random();
         roll = rand.nextInt(6) + 1;
     }
-    int getTheRoll(){
-        return roll;
-    }
     void showDice(){
         System.out.println(name+":"+roll+",");
     }
