@@ -3,36 +3,65 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 class PlayerTest {
-    @Test void yauchtTest(){
+    
+    @Test void aceTest(){
         Player a = new Player("a");
-        ArrayList <Integer> b = new ArrayList<>();
+        ArrayList<Integer> di = new ArrayList<>();//代数
         for(int i=0;i<a.dices.size();i++){
             a.dices.get(i).rollTheDice();
-            b.add(a.dices.get(i).roll);
+            a.dices.get(i).showDice();
+            di.add(a.dices.get(i).roll);
         }
-        a.yacht();
+        a.ace();
         a.myScore.showScoreSeat();
-    }
-    @Test void yTest(){
-            ArrayList<Integer> alg = new ArrayList<>();
-            ArrayList<Integer> check = new ArrayList<>();
-            Player b = new Player("b");
-            for(int y=0;y<b.dices.size();y++){
-                alg.add(b.dices.get(y).roll);
-            }
-            for(int y_1=1;y_1<=6;y_1++){
-                for(int y_2=0;y_2<5;y_2++){
-                    check.add(y_1);
-                }
-                System.out.println(check);
-                if(alg.containsAll(check)){
-                    for(int y_3=0;y_3<b.dices.size();y_3++){
-                        b.myScore.scores[11].roleScores+=b.dices.get(y_3).roll;
-                    }
-                }
-            }
+        //スコアシートのエースのところに値が保存されているか
+        if(di.contains(1)){
+            assertTrue(a.myScore.scores[0].roleScores>=1);
+        } else{
+            assertTrue(a.myScore.scores[0].roleScores==0);
         }
+        
     }
+    //エースからシックスまでの合計が63を超えたらボーナスの値に35が入るか
+    @Test void bonusTest(){
+        Player a = new Player("a");
+        for(int i=0;i<a.dices.size();i++){
+            a.myScore.scores[i].roleScores+=15;
+        }
+        a.bonus();
+        a.myScore.showScoreSeat();
+        assertTrue(a.myScore.scores[12].roleScores==35);
+    }
+    @Test void sStraightTeut(){//sStraight()と動作はあまり変わらない
+        Player a = new Player("a");
+        ArrayList<Integer> di = new ArrayList<>();//代数
+        ArrayList<Integer> check_11 = new ArrayList<>();
+        ArrayList<Integer> check_22 = new ArrayList<>();
+        ArrayList<Integer> check_33= new ArrayList<>();
+        for(int s_11=1;s_11<=4;s_11++){
+            check_11.add(s_11);
+        }
+        for(int s_22=2;s_22<=5;s_22++){
+            check_22.add(s_22);
+        }
+        for(int s_33=3;s_33<=6;s_33++){
+            check_33.add(s_33);
+        }
+        for(int i=0;i<a.dices.size();i++){
+            a.dices.get(i).rollTheDice();
+            a.dices.get(i).showDice();
+            di.add(a.dices.get(i).roll);
+        }
+        a.sStraight();
+        a.myScore.showScoreSeat();
+        if(di.containsAll(check_11)||di.containsAll(check_22)||di.containsAll(check_33)){
+            assertTrue(a.myScore.scores[9].roleScores==15);
+        }else{
+            assertTrue(a.myScore.scores[9].roleScores==0);
+        }
+
+    }
+}    
 
  
        

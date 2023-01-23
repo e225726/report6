@@ -29,9 +29,11 @@ public class ScoreSeat {
         scores[13] = new Score("合計",0);
     }
     void showScoreSeat(){
-        for(int i=0;i<scores.length;i++){
-            System.out.println(scores[i].roleName+scores[i].roleScores);
+        System.out.println("ーーーーーーー");
+        for(int i=0;i<scores.length;i++){ 
+            System.out.println(scores[i].roleName+"："+scores[i].roleScores);
         }
+        System.out.println("ーーーーーーー");
     }
     
 }

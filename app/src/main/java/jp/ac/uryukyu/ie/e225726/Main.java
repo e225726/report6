@@ -10,7 +10,7 @@ public class Main {
         ArrayList<Player> turn = new ArrayList<>();
         turn.add(a);
         turn.add(b);
-        for(int i=0;i<12;i++){
+        for(int i=1;i<=12;i++){
             System.out.println(i+"ターン目");
             for(int in=0;in<turn.size();in++){
                 System.out.println(turn.get(in).name+"の番");

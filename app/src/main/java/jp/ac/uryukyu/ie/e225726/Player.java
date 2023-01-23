@@ -4,6 +4,8 @@ public class Player {
     String name;
     ArrayList <Dice> dices = new ArrayList<>();//サイコロ５つ使う
     ScoreSeat myScore = new ScoreSeat();
+    CommandSelector co_role = new CommandSelector();//役のコマンド
+    CommandSelector co_dice = new CommandSelector();//サイコロのコマンド
 
     Player(String name){
         this.name = name;
@@ -11,21 +13,23 @@ public class Player {
         dices.add(new Dice("サイコロb",0));
         dices.add(new Dice("サイコロc",0));
         dices.add(new Dice("サイコロd",0));
-        dices.add(new Dice("サイコロe",0));    
+        dices.add(new Dice("サイコロe",0));
+        for(int i_dice=0;i_dice<12;i_dice++){
+            co_role.addCommand(myScore.scores[i_dice].roleName);
+        }
+        for(int i=0;i<dices.size();i++){
+            co_dice.addCommand(dices.get(i).name);
+        }   
     }
     //サイコロふる
     void rollDice(){
-        CommandSelector c = new CommandSelector();
-        for(int i=0;i<dices.size();i++){
-            c.addCommand(dices.get(i).name);
-        }
         System.out.println("サイコロを振る");
         for(int ii=0;ii<dices.size();ii++){
             dices.get(ii).rollTheDice();
             dices.get(ii).showDice();
         }
         for(int iii=0;iii<2;iii++){
-            var dice =c.waitForUsersCommandDice("どのサイコロを振り直す？");
+            var dice =co_dice.waitForUsersCommandDice("どのサイコロを振り直す？");
             if(dice.contains(5)==false){
                for(int iiii=0;iiii<dice.size();iiii++){
                    dices.get(dice.get(iiii)).rollTheDice();
@@ -39,33 +43,30 @@ public class Player {
     }
     //役をきめる
     void decideRole(){
-        CommandSelector co = new CommandSelector();
-        for(int i=0;i<12;i++){
-            co.addCommand(myScore.scores[i].roleName);
-        }
-        var ro = co.waitForUsersCommandRole("どの役にする？");
         myScore.showScoreSeat();
+        var ro = co_role.waitForUsersCommandRole("どの役にする？");
         switch(ro){
             case 0: ace(); 
                     bonus();break;
             case 1: duce(); 
-                    bonus(); break;
+                    bonus();break;
             case 2: tray();
-                    bonus(); break;
+                    bonus();break;
             case 3: four(); 
-                    bonus(); break;
+                    bonus();break;
             case 4: five(); 
-                    bonus(); break;
+                    bonus();break;
             case 5: six(); 
-                    bonus(); break; 
-            case 6: choice(); break;
-            case 7: fourDice(); break;
-            case 8: fullHouse(); break;
-            case 9: sStraight(); break;
-            case 10: bStraight(); break;
-            case 11: yacht(); break;   
+                    bonus();break; 
+            case 6: choice();break;
+            case 7: fourDice();break;
+            case 8: fullHouse();break;
+            case 9: sStraight();break;
+            case 10: bStraight();break;
+            case 11: yacht();break;   
         }
         myScore.showScoreSeat();
+        co_role.commands.set(ro, "選択済み");
     }
     //エースの時の処理
     void ace(){
@@ -121,7 +122,7 @@ public class Player {
         for(int b=0;b<6;b++){
             bon+=myScore.scores[b].roleScores;
         }
-        if(bon==63){
+        if(bon>=63){
             myScore.scores[12].roleScores+=35;
         }
     }

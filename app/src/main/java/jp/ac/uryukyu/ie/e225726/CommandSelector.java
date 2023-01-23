@@ -17,16 +17,17 @@ public class CommandSelector {
     void clearCommands() {
         commands.clear();
     }
+    void setCommands(int command_number,String command_name){
+        commands.set(command_number,command_name);
+    }
 
     //promptを表示した上で，ユーザの選択を待つ
     ArrayList<Integer> waitForUsersCommandDice(String prompt) {
-        var index = 0;
         System.out.println(prompt);
-        for(var command : commands) { //選択肢をprint
-            System.out.println(index + ":" + command);
-            index += 1;
+        for(int index=0;index<commands.size();index++) { //選択肢をprint
+            System.out.println(index + ":" + commands.get(index));
         }
-        System.out.println(index+":"+"なし");
+        System.out.println(commands.size()+":"+"なし");
 
         //標準入力から文字列を入力・文字列を数字の配列にする
         while(true) {
@@ -42,11 +43,9 @@ public class CommandSelector {
         }        
     }
     int waitForUsersCommandRole(String prompt) {
-        var index = 0;
         System.out.println(prompt);
-        for(var command : commands) { //選択肢をprint
-            System.out.println(index + ":" + command);
-            index += 1;
+        for(int index=0;index<commands.size();index++) { //選択肢をprint
+            System.out.println(index + ":" + commands.get(index));
         }
         while(true){
             int target_role = scanner.nextInt();
