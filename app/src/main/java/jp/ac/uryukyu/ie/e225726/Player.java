@@ -44,6 +44,7 @@ public class Player {
             co.addCommand(myScore.scores[i].roleName);
         }
         var ro = co.waitForUsersCommandRole("どの役にする？");
+        myScore.showScoreSeat();
         switch(ro){
             case 0: ace(); 
                     bonus();break;
@@ -171,7 +172,7 @@ public class Player {
     void bStraight(){
         ArrayList<Integer> check_1 = new ArrayList<>();
         ArrayList<Integer> check_2 = new ArrayList<>();
-        ArrayList <Integer> alg = new ArrayList<>();
+        ArrayList <Integer> alge = new ArrayList<>();
         for(int b_1=1;b_1<=5;b_1++){
             check_1.add(b_1);
         }
@@ -179,28 +180,27 @@ public class Player {
             check_2.add(b_2);
         }
         for(int b_3=0;b_3<dices.size();b_3++){
-            alg.add(dices.get(b_3).roll);
+            alge.add(dices.get(b_3).roll);
         }
-        if(alg.containsAll(check_1)||alg.containsAll(check_2)){
+        if(alge==check_1||alge==check_2){
             myScore.scores[10].roleScores+=30;
         }
     }
     //ヨットの時の処理
     void yacht(){
-        ArrayList<Integer> alg = new ArrayList<>();
+        ArrayList<Integer> algeb = new ArrayList<>();
         ArrayList<Integer> check = new ArrayList<>();
         for(int y=0;y<dices.size();y++){
-            alg.add(dices.get(y).roll);
+            algeb.add(dices.get(y).roll);
         }
         for(int y_1=1;y_1<=6;y_1++){
             for(int y_2=0;y_2<5;y_2++){
                 check.add(y_1);
             }
-            if(alg.containsAll(check)){
-                for(int y_3=0;y_3<dices.size();y_3++){
-                    myScore.scores[11].roleScores+=dices.get(y_3).roll;
-                }
+            if(algeb==check){
+                myScore.scores[11].roleScores+=50;
             }
+            check.clear();
         }
     }
     //合計の処理

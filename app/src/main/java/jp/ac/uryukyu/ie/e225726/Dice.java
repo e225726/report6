@@ -11,7 +11,7 @@ public class Dice {
     }
     void rollTheDice(){
         Random rand = new Random();
-        roll = rand.nextInt(5) + 1;
+        roll = rand.nextInt(6) + 1;
     }
     int getTheRoll(){
         return roll;
