@@ -46,17 +46,17 @@ public class Player {
         myScore.showScoreSeat();
         var ro = co_role.waitForUsersCommandRole("どの役にする？");
         switch(ro){
-            case 0: ace(); 
+            case 0: ace_six(ro); 
                     bonus();break;
-            case 1: duce(); 
+            case 1: ace_six(ro); 
                     bonus();break;
-            case 2: tray();
+            case 2: ace_six(ro);
                     bonus();break;
-            case 3: four(); 
+            case 3: ace_six(ro); 
                     bonus();break;
-            case 4: five(); 
+            case 4: ace_six(ro); 
                     bonus();break;
-            case 5: six(); 
+            case 5: ace_six(ro); 
                     bonus();break; 
             case 6: choice();break;
             case 7: fourDice();break;
@@ -68,54 +68,15 @@ public class Player {
         myScore.showScoreSeat();
         co_role.commands.set(ro, "選択済み");
     }
-    //エースの時の処理
-    void ace(){
+    //エース〜シックスの時の処理
+    void ace_six(int index){
         for(int a=0;a<dices.size();a++){
-            if(dices.get(a).roll==1){
-               myScore.scores[0].roleScores += dices.get(a).roll; 
+            if(dices.get(a).roll==index+1){
+               myScore.scores[index].roleScores += dices.get(a).roll; 
             } 
         }
     }
-    //ヂュースの時に処理
-    void duce(){
-        for(int d=0;d<dices.size();d++){
-            if(dices.get(d).roll==2){
-               myScore.scores[1].roleScores += dices.get(d).roll; 
-            } 
-        }
-    }
-    //トレイの時の処理
-    void tray(){
-        for(int t=0;t<dices.size();t++){
-            if(dices.get(t).roll==3){
-               myScore.scores[2].roleScores += dices.get(t).roll; 
-            } 
-        }
-    }
-    //フォーの時の処理
-    void four(){
-        for(int f=0;f<dices.size();f++){
-            if(dices.get(f).roll==4){
-               myScore.scores[3].roleScores += dices.get(f).roll; 
-            } 
-        }
-    }
-    //ファイブの時の処理
-    void five(){
-        for(int fi=0;fi<dices.size();fi++){
-            if(dices.get(fi).roll==5){
-               myScore.scores[4].roleScores += dices.get(fi).roll; 
-            } 
-        }
-    }
-    //シックスの時の処理
-    void six(){
-        for(int s=0;s<dices.size();s++){
-            if(dices.get(s).roll==6){
-               myScore.scores[5].roleScores += dices.get(s).roll; 
-            } 
-        }
-    }
+    
     //ボーナスの時の処理
     void bonus(){
         int bon=0;//適当な変数　なんでもいい

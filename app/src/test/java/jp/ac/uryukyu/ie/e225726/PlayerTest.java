@@ -12,7 +12,7 @@ class PlayerTest {
             a.dices.get(i).showDice();
             di.add(a.dices.get(i).roll);//代入
         }
-        a.ace();
+        a.ace_six(0);
         a.myScore.showScoreSeat();
         //スコアシートのエースのところに値が保存されているか
         if(di.contains(1)){
