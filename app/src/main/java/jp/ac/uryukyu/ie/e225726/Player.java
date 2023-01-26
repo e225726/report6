@@ -144,7 +144,7 @@ public class Player {
         for(int b_3=0;b_3<dices.size();b_3++){
             alge.add(dices.get(b_3).roll);
         }
-        if(alge==check_1||alge==check_2){
+        if(alge.containsAll(check_1)||alge.containsAll(check_2)){
             myScore.scores[10].roleScores+=30;
         }
     }
